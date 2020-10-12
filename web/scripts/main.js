@@ -13,20 +13,7 @@
     const BREAK = 750; // ms
     var reactions = ["👍", "❤️", "👏"];
 
-    // State for ring debouncing
-    var isHigh = false;
-    var lastLow = Date.now();
-    var lastHigh = Date.now();
-    var rings = 0;
-
-    let speech = new SpeechSynthesisUtterance();
-
-    function postMessage(msg, className) {
-        var d = document.createElement("div");
-        d.innerText = msg;
-        d.className = className;
-        document.getElementById("chat").appendChild(d);
-    }
+    /* Sending and Displaying Messages */
 
     function sendMessage(msg) {
         //TODO: Send the message to Teams!
@@ -38,14 +25,42 @@
         speak(msg);
     }
 
+    function postMessage(msg, className) {
+        var detailsDiv = document.createElement("div");
+        detailsDiv.classList = "details";
+        var d = new Date();
+        var h = (d.getHours() % 12) || 12;
+        var AMPM = d.getHours() < 12 ? "AM" : "PM";
+        detailsDiv.innerText = h + ":" + d.getMinutes() + " " + AMPM;
+
+        var messageDiv = document.createElement("div");
+        messageDiv.classList = "content";
+        messageDiv.innerText = msg;
+
+        var outerDiv = document.createElement("div");
+        outerDiv.className = className;
+        outerDiv.appendChild(detailsDiv);
+        outerDiv.appendChild(messageDiv);
+        document.getElementById("chat").appendChild(outerDiv);
+    }
+
+    /* Text-to-speech */
+    let speech = new SpeechSynthesisUtterance();
+    speech.lang = "en-US";
+    speech.volume = 1;
+    speech.rate = 1;
+    speech.pitch = 1;
     function speak(msg) {
-        speech.lang = "en-US";
         speech.text = msg;
-        speech.volume = 1;
-        speech.rate = 1;
-        speech.pitch = 1;
         window.speechSynthesis.speak(speech);
     }
+
+    /* Ring Detection & Counting */
+
+    /* State for ring debouncing */
+    var isHigh = false;
+    var lastHigh = Date.now();
+    var rings = 0;
 
     function debounceRings(val, callback) {
         // Ringing:
@@ -65,7 +80,6 @@
                 rings = 0;
             }
             isHigh = false;
-            lastLow = Date.now();
         }
     }
 
@@ -97,7 +111,7 @@
                 }
 
                 var average = values / length;
-
+                //console.log(average);
                 debounceRings(average, callback);
             }
         })
@@ -107,7 +121,6 @@
     }
 
     function react(rings) {
-        console.log(rings);
         msg = "";
         if (rings <= reactions.length) {
             msg = reactions[rings - 1];
@@ -119,47 +132,34 @@
         sendMessage(msg + "\n ");
     }
 
-    // For testing
+    /* Testing */
     function clap() {
+        // simulate a short, loud noise
         debounceRings(HIGH + 1, react);
     }
 
     function test() {
-        console.log("Starting tests");
-        var tests = [
+        var testFunctions = [
             function () {
                 receiveMessage("I've just solved that problem you were having!")
             },
-            function () {
-                clap()
-            },
+            clap,
             function () {},
-            function () {
-                clap()
-            },
-            function () {
-                clap()
-            },
+            clap,
+            clap,
             function () {},
-            function () {
-                clap()
-            },
-            function () {
-                clap()
-            },
-            function () {
-                clap()
-            }
+            clap,
+            clap,
+            clap
         ];
 
         var idx = 0;
         var tm = setInterval(function () {
-                if (idx >= tests.length) {
+                if (idx >= testFunctions.length) {
                     clearInterval(tm);
                     return;
                 }
-                var nextTest = tests[idx];
-                nextTest();
+                testFunctions[idx]();
                 idx++;
             }, BREAK * 0.7);
 
@@ -170,6 +170,7 @@
         document.getElementById("bye").addEventListener("click", test);
     }
 
+    /* Start */
     getVolume(react);
-    console.log('Ready.')
+    console.log('Ready.');
 })();
