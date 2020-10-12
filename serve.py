@@ -6,13 +6,15 @@ app = Flask(__name__)
 def index():
     return send_file('web/index.html')
 
-@app.route('/scripts/<path:path>')
-def send_js(path):
-    return send_from_directory('web/scripts', path)
+@app.route('/favicon.ico', methods=['GET'])
+def favicon():
+    return send_file('web/resources/favicon.ico')
 
-@app.route('/styles/<path:path>')
-def send_css(path):
-    return send_from_directory('web/styles', path)
+
+@app.route('/resources/<path:path>')
+def send_static(path):
+    return send_from_directory('web/resources', path)
+
 
 if __name__ == "__main__":
     app.run()
