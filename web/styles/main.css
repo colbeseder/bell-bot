@@ -2,6 +2,10 @@ body {
 	background-color: white;
 }
 
+.mine, .theirs {
+	margin: 2px;
+}
+
 .mine {
 	background-color: purple;
 }
