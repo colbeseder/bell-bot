@@ -12,9 +12,9 @@
     const HIGH = 60; // %
     const BREAK = 750; // ms
     var reactions = ["👍", "❤️", "👏"];
+    var user = 1; //TODO!
 
     /* Sending and Displaying Messages */
-
     function sendMessage(msg) {
         //TODO: Send the message to Teams!
         postMessage(msg, "mine");
@@ -25,7 +25,32 @@
         speak(msg);
     }
 
-    function postMessage(msg, className) {
+    var loadedMessages = new Set(); ;
+    function processMessage(obj) {
+        if (loadedMessages.has(obj.id)) {
+            return;
+        }
+        if (obj.from === "me") {
+            postMessage(obj.body, "mine", obj.from);
+        } else {
+            postMessage(obj.body, "theirs", obj.from);
+            speak(obj.body);
+        }
+        loadedMessages.add(obj.id);
+    }
+
+    function get_messages() {
+        fetch("messages/" + user + ".json?v=" + Date.now())
+        .then(r => r.json())
+        .then(data => data.messages.forEach(processMessage));
+    }
+
+    function postMessage(msg, className, from) {
+        from = from || "";
+        var nameboxDiv = document.createElement("div");
+        nameboxDiv.classList = "namebox";
+        nameboxDiv.innerText = from;
+
         var detailsDiv = document.createElement("div");
         detailsDiv.classList = "details";
         var d = new Date();
@@ -40,6 +65,7 @@
 
         var outerDiv = document.createElement("div");
         outerDiv.className = className;
+        outerDiv.appendChild(nameboxDiv);
         outerDiv.appendChild(detailsDiv);
         outerDiv.appendChild(messageDiv);
         document.getElementById("chat").appendChild(outerDiv);
@@ -138,6 +164,7 @@
         // simulate a short, loud noise
         debounceRings(HIGH + 1, react);
     }
+    window.clap = clap;
 
     function test() {
         console.log("running tests");
@@ -153,6 +180,11 @@
             clap,
             clap,
             function () {},
+            clap,
+            clap,
+            clap,
+            function () {},
+            clap,
             clap,
             clap,
             clap
@@ -176,6 +208,9 @@
         getVolume(react);
         if (location.hash === "#test") {
             test();
+        } else {
+            get_messages();
+            setInterval(get_messages, 1000);
         }
         console.log('Ready.');
     }

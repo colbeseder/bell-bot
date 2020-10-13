@@ -15,6 +15,9 @@ def favicon():
 def send_static(path):
     return send_from_directory('web/resources', path)
 
+@app.route('/messages/<path:path>')
+def get_messages(path):
+    return send_from_directory('web/stubs', path)
 
 if __name__ == "__main__":
     app.run()

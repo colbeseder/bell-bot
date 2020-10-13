@@ -41,3 +41,8 @@ body {
 .theirs {
 	background-color: #c0c0c0;
 }
+
+.namebox {
+    float: left;
+    padding-right: 1em;
+}
