@@ -235,11 +235,18 @@
             document.getElementById("logging").style.display = "block";
         }
 
-        var r = /v=(\d+)/;
+        var r = /\bHIGH=(\d+)/;
         var matches = r.exec(location.hash);
         if (matches) {
             HIGH = parseInt(matches[1], 10);
-			log("Volume threshold is " + HIGH);
+			log("Volume threshold is " + HIGH + "%");
+        }
+		
+		var r = /\bBREAK=(\d+)/;
+        var matches = r.exec(location.hash);
+        if (matches) {
+            BREAK = parseInt(matches[1], 10);
+			log("Break threshold is " + BREAK + " ms");
         }
     }
 

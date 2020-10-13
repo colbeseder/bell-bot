@@ -19,7 +19,7 @@ body {
 
 #logging {
 	display: none; /* set to block for mobile debugging */
-	background-color: green;
+	background-color: lightgreen;
     width: 13em;
     margin-left: 1em;
     padding: 0.5em;
