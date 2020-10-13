@@ -1,4 +1,5 @@
-# bell-bot
+# Chime In!
+## Bell bot
  
 A just-for-fun project for the _hybrid productivity platform_ hackathon.
 
