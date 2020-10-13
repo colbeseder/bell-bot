@@ -13,6 +13,10 @@ body {
 	margin: 3em;
 }
 
+.flash {
+	background-color: #f1edd1;
+}
+
 #logging {
 	display: none; /* set to block for mobile debugging */
 	background-color: green;
