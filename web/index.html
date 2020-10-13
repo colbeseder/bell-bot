@@ -2,17 +2,21 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-</head>
-<body>
-	<!-- Get use interaction to activate Speech & Mic APIs -->
-	<button id="bye" onclick="this.style.display='none'">Ready?</button>
-
-	<div id="chat">
-	</div>
-
+	<link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="resources/main.css">
 	<!-- For testing -->
 	<link rel="stylesheet" href="resources/main2.css">
+</head>
+<body>
+	<div id="topbar">
+		<img src="resources/logo.png" id="logo">
+		<span>Chime In!</span>
+	</div>
+	<!-- Get use interaction to activate Speech & Mic APIs -->
+	<button id="bye" onclick="init(this)">Ready?</button>
+
+	<div id="chat">
+	</div>
 	<script src="resources/main.js"></script>
 </body>
 </html>
