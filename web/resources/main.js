@@ -104,9 +104,9 @@
         document.getElementById('vol').innerText = val;
         // Ringing:
         if (val >= HIGH) {
-            document.getElementById('vol').style.color = "red";
             // Ring Just started:
             if (!isHigh) {
+				flash(true);
                 rings++;
             }
             lastHigh = Date.now();
@@ -114,7 +114,7 @@
         }
         // Quiet (not ringing):
         else if (val < HIGH) {
-            document.getElementById('vol').style.color = "black";
+			flash(false);
             // Ringing has stopped. Send reaction.
             if (rings && !isHigh && (lastHigh + BREAK) < Date.now()) {
                 callback(rings);
@@ -216,6 +216,19 @@
             }, BREAK * 0.7);
 
     }
+
+	function flash(isOn){
+		var className = "flash";
+		var chatClasses = document.body.classList;
+		if (isOn){
+			chatClasses.add(className);
+			document.getElementById('vol').style.color = "red";
+		}
+		else {
+			chatClasses.remove(className);
+			document.getElementById('vol').style.color = "black";
+		}
+	}
 
     function devMode() {
         if (/log/.test(location.hash)) {
