@@ -9,7 +9,7 @@
  */
 
 (function () {
-    const HIGH = 40; // %
+    const HIGH = 60; // %
     const BREAK = 750; // ms
     var reactions = ["👍", "❤️", "👏"];
 
@@ -140,7 +140,11 @@
     }
 
     function test() {
+        console.log("running tests");
         var testFunctions = [
+            function () {
+                receiveMessage("Hi...")
+            },
             function () {
                 receiveMessage("I've just solved that problem you were having!")
             },
@@ -166,12 +170,13 @@
 
     }
 
-    if (location.hash === "#test") {
-        console.log("test mode");
-        document.getElementById("bye").addEventListener("click", test);
-    }
-
     /* Start */
-    getVolume(react);
-    console.log('Ready.');
+    window.init = function (button) {
+        button.style.display = 'none';
+        getVolume(react);
+        if (location.hash === "#test") {
+            test();
+        }
+        console.log('Ready.');
+    }
 })();
