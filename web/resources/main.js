@@ -9,10 +9,17 @@
  */
 
 (function () {
-    const HIGH = 60; // %
+    const HIGH = 40; // %
     const BREAK = 750; // ms
     var reactions = ["👍", "❤️", "👏"];
     var user = 1; //TODO!
+
+	/* For debugging */
+	function log(msg){
+		document.getElementById('debug').innerText += "\n" + msg;
+	}
+
+	log("Version 0.1");
 
     /* Sending and Displaying Messages */
     function sendMessage(msg) {
@@ -72,14 +79,18 @@
     }
 
     /* Text-to-speech */
-    let speech = new SpeechSynthesisUtterance();
-    speech.lang = "en-US";
-    speech.volume = 1;
-    speech.rate = 1;
-    speech.pitch = 1;
     function speak(msg) {
-        speech.text = msg;
-        window.speechSynthesis.speak(speech);
+        try {
+            let speech = new SpeechSynthesisUtterance();
+            speech.lang = "en-US";
+            speech.volume = 1;
+            speech.rate = 1;
+            speech.pitch = 1;
+            speech.text = msg;
+            window.speechSynthesis.speak(speech);
+        } catch (er) {
+            log(er);
+        }
     }
 
     /* Ring Detection & Counting */
@@ -90,8 +101,10 @@
     var rings = 0;
 
     function debounceRings(val, callback) {
+        document.getElementById('vol').innerText = val;
         // Ringing:
         if (val >= HIGH) {
+            document.getElementById('vol').style.color = "red";
             // Ring Just started:
             if (!isHigh) {
                 rings++;
@@ -101,6 +114,7 @@
         }
         // Quiet (not ringing):
         else if (val < HIGH) {
+            document.getElementById('vol').style.color = "black";
             // Ringing has stopped. Send reaction.
             if (rings && !isHigh && (lastHigh + BREAK) < Date.now()) {
                 callback(rings);
@@ -138,12 +152,13 @@
                 }
 
                 var average = values / length;
-                //console.log(average);
+
                 debounceRings(average, callback);
             }
         })
         .catch(function (err) {
             console.log("Microphone read error");
+            alert("Microphone read error");
         });
     }
 

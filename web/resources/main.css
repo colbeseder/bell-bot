@@ -9,6 +9,15 @@ body {
 	margin: 3em;
 }
 
+.logging {
+	display: none; /* set to block for mobile debugging */
+	background-color: green;
+    width: 13em;
+    margin-left: 10em;
+    padding: 0.5em;
+    border: black solid;
+}
+
 #topbar {
 	background-color: #8500cc;
 	color: white;
