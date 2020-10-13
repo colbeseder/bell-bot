@@ -13,11 +13,11 @@ body {
 	margin: 3em;
 }
 
-.logging {
+#logging {
 	display: none; /* set to block for mobile debugging */
 	background-color: green;
     width: 13em;
-    margin-left: 10em;
+    margin-left: 1em;
     padding: 0.5em;
     border: black solid;
 }

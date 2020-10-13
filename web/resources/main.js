@@ -9,17 +9,17 @@
  */
 
 (function () {
-    const HIGH = 40; // %
-    const BREAK = 750; // ms
+    var HIGH = 40; // %
+    var BREAK = 750; // ms
     var reactions = ["👍", "❤️", "👏"];
     var user = 1; //TODO!
 
-	/* For debugging */
-	function log(msg){
-		document.getElementById('debug').innerText += "\n" + msg;
-	}
+    /* For debugging */
+    function log(msg) {
+        document.getElementById('debug').innerText += "\n" + msg;
+    }
 
-	log("Version 0.1");
+    log("Version 0.1");
 
     /* Sending and Displaying Messages */
     function sendMessage(msg) {
@@ -217,7 +217,21 @@
 
     }
 
+    function devMode() {
+        if (/log/.test(location.hash)) {
+            document.getElementById("logging").style.display = "block";
+        }
+
+        var r = /v=(\d+)/;
+        var matches = r.exec(location.hash);
+        if (matches) {
+            HIGH = parseInt(matches[1], 10);
+			log("Volume threshold is " + HIGH);
+        }
+    }
+
     /* Start */
+	devMode();
     window.init = function (button) {
         button.style.display = 'none';
         getVolume(react);
