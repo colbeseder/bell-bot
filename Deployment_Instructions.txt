@@ -11,4 +11,8 @@ curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
 python3 get-pip.py
 python3 -m pip install flask
 python3 -m pip install pyopenssl
+python3 -m pip install botbuilder-core
+python3 -m pip install asyncio
+python3 -m pip install aiohttp
+python3 -m pip install cookiecutter==1.7.0
 sudo python3 serve.py
