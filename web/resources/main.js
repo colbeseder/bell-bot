@@ -76,6 +76,7 @@
         outerDiv.appendChild(detailsDiv);
         outerDiv.appendChild(messageDiv);
         document.getElementById("chat").appendChild(outerDiv);
+		window.scrollTo(0,document.body.scrollHeight);
     }
 
     /* Text-to-speech */
