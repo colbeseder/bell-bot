@@ -76,7 +76,7 @@
         outerDiv.appendChild(detailsDiv);
         outerDiv.appendChild(messageDiv);
         document.getElementById("chat").appendChild(outerDiv);
-		window.scrollTo(0,document.body.scrollHeight);
+        window.scrollTo(0, document.body.scrollHeight);
     }
 
     /* Text-to-speech */
@@ -107,7 +107,7 @@
         if (val >= HIGH) {
             // Ring Just started:
             if (!isHigh) {
-				flash(true);
+                flash(true);
                 rings++;
             }
             lastHigh = Date.now();
@@ -115,7 +115,7 @@
         }
         // Quiet (not ringing):
         else if (val < HIGH) {
-			flash(false);
+            flash(false);
             // Ringing has stopped. Send reaction.
             if (rings && !isHigh && (lastHigh + BREAK) < Date.now()) {
                 callback(rings);
@@ -186,24 +186,11 @@
         console.log("running tests");
         var testFunctions = [
             function () {
-                receiveMessage("Hi...")
+                receiveMessage("Hey. Can you meet the buyer today?")
             },
             function () {
-                receiveMessage("I've just solved that problem you were having!")
-            },
-            clap,
-            function () {},
-            clap,
-            clap,
-            function () {},
-            clap,
-            clap,
-            clap,
-            function () {},
-            clap,
-            clap,
-            clap,
-            clap
+                receiveMessage("Meeting confirmed. He sounded super keen!")
+            }
         ];
 
         var idx = 0;
@@ -214,22 +201,21 @@
                 }
                 testFunctions[idx]();
                 idx++;
-            }, BREAK * 0.7);
+            }, 5E3);
 
     }
 
-	function flash(isOn){
-		var className = "flash";
-		var chatClasses = document.body.classList;
-		if (isOn){
-			chatClasses.add(className);
-			document.getElementById('vol').style.color = "red";
-		}
-		else {
-			chatClasses.remove(className);
-			document.getElementById('vol').style.color = "black";
-		}
-	}
+    function flash(isOn) {
+        var className = "flash";
+        var chatClasses = document.body.classList;
+        if (isOn) {
+            chatClasses.add(className);
+            document.getElementById('vol').style.color = "red";
+        } else {
+            chatClasses.remove(className);
+            document.getElementById('vol').style.color = "black";
+        }
+    }
 
     function devMode() {
         if (/log/.test(location.hash)) {
@@ -240,23 +226,23 @@
         var matches = r.exec(location.hash);
         if (matches) {
             HIGH = parseInt(matches[1], 10);
-			log("Volume threshold is " + HIGH + "%");
+            log("Volume threshold is " + HIGH + "%");
         }
-		
-		var r = /\bBREAK=(\d+)/;
+
+        var r = /\bBREAK=(\d+)/;
         var matches = r.exec(location.hash);
         if (matches) {
             BREAK = parseInt(matches[1], 10);
-			log("Break threshold is " + BREAK + " ms");
+            log("Break threshold is " + BREAK + " ms");
         }
     }
 
     /* Start */
-	devMode();
+    devMode();
     window.init = function (button) {
         button.style.display = 'none';
         getVolume(react);
-        if (location.hash === "#test") {
+        if (/\btest\b/.test(location.hash)) {
             test();
         } else {
             get_messages();
