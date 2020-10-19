@@ -1,5 +1,5 @@
 * {
-    box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 body {
@@ -10,16 +10,16 @@ body {
 }
 
 #bye {
-    margin: 3em;
+	margin: 3em;
 }
 
 .flash {
-    background-color: #f1edd1;
+	background-color: #f1edd1;
 }
 
 #logging {
-    display: none; /* set to block for mobile debugging */
-    background-color: lightgreen;
+	display: none; /* set to block for mobile debugging */
+	background-color: lightgreen;
     width: 13em;
     margin-left: 1em;
     padding: 0.5em;
@@ -27,11 +27,11 @@ body {
 }
 
 #topbar {
-    width: 100%;
-    background-color: #8500cc;
-    color: white;
-    height: 3em;
-    margin-bottom: 10px;
+	width: 100%;
+	background-color: #8500cc;
+	color: white;
+	height: 3em;
+	margin-bottom: 10px;
 }
 
 #topbar>span{
@@ -44,44 +44,23 @@ body {
 }
 
 #logo {
-    width : 3em;
-    float: left;
+	width : 3em;
+	float: left;
+}
+
+.mine, .theirs {
+	margin: 2px;
+}
+
+.mine {
+	background-color: purple;
+}
+
+.theirs {
+	background-color: #c0c0c0;
 }
 
 .namebox {
     float: left;
     padding-right: 1em;
-}
-
-.mine, .theirs {
-    background: #00aabb;
-    padding: 0.5em;
-    padding-top: 0.3em;
-    padding-bottom: 0.3em;
-    margin: 2px;
-    margin-bottom: 6px;
-    width: max-content;
-    max-width: 85%;
-    min-width: 7em;
-
-    position: relative;
-    border-radius: .3em;
-}
-
-.mine {
-    background-color: #e5e5f1;
-    margin-left:auto;
-    margin-right: 10px;
-    padding-right: 2em;
-}
-
-.theirs {
-    background-color: #ffffff;
-    padding-left: 2em;
-    margin-left: 10px;
-}
-
-.details, .namebox {
-    font-size: 65%;
-    color: #646464;
 }
