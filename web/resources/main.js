@@ -64,7 +64,7 @@
         var h = (d.getHours() % 12) || 12;
         var m = ("0" + d.getMinutes()).slice(-2);
         var AMPM = d.getHours() < 12 ? "AM" : "PM";
-        detailsDiv.innerText = h + ":" + d.getMinutes() + " " + AMPM;
+        detailsDiv.innerText = h + ":" + m + " " + AMPM;
 
         var messageDiv = document.createElement("div");
         messageDiv.classList = "content";
