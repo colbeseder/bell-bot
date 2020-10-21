@@ -9,10 +9,17 @@
  */
 
 (function () {
-    const HIGH = 60; // %
-    const BREAK = 750; // ms
+    var HIGH = 40; // %
+    var BREAK = 750; // ms
     var reactions = ["👍", "❤️", "👏"];
     var user = 1; //TODO!
+
+    /* For debugging */
+    function log(msg) {
+        document.getElementById('debug').innerText += "\n" + msg;
+    }
+
+    log("Version 0.1");
 
     /* Sending and Displaying Messages */
     function sendMessage(msg) {
@@ -57,7 +64,7 @@
         var h = (d.getHours() % 12) || 12;
         var m = ("0" + d.getMinutes()).slice(-2);
         var AMPM = d.getHours() < 12 ? "AM" : "PM";
-        detailsDiv.innerText = h + ":" + d.getMinutes() + " " + AMPM;
+        detailsDiv.innerText = h + ":" + m + " " + AMPM;
 
         var messageDiv = document.createElement("div");
         messageDiv.classList = "content";
@@ -69,17 +76,22 @@
         outerDiv.appendChild(detailsDiv);
         outerDiv.appendChild(messageDiv);
         document.getElementById("chat").appendChild(outerDiv);
+        window.scrollTo(0, document.body.scrollHeight);
     }
 
     /* Text-to-speech */
-    let speech = new SpeechSynthesisUtterance();
-    speech.lang = "en-US";
-    speech.volume = 1;
-    speech.rate = 1;
-    speech.pitch = 1;
     function speak(msg) {
-        speech.text = msg;
-        window.speechSynthesis.speak(speech);
+        try {
+            let speech = new SpeechSynthesisUtterance();
+            speech.lang = "en-US";
+            speech.volume = 1;
+            speech.rate = 1;
+            speech.pitch = 1;
+            speech.text = msg;
+            window.speechSynthesis.speak(speech);
+        } catch (er) {
+            log(er);
+        }
     }
 
     /* Ring Detection & Counting */
@@ -90,10 +102,12 @@
     var rings = 0;
 
     function debounceRings(val, callback) {
+        document.getElementById('vol').innerText = val;
         // Ringing:
         if (val >= HIGH) {
             // Ring Just started:
             if (!isHigh) {
+                flash(true);
                 rings++;
             }
             lastHigh = Date.now();
@@ -101,6 +115,7 @@
         }
         // Quiet (not ringing):
         else if (val < HIGH) {
+            flash(false);
             // Ringing has stopped. Send reaction.
             if (rings && !isHigh && (lastHigh + BREAK) < Date.now()) {
                 callback(rings);
@@ -138,12 +153,13 @@
                 }
 
                 var average = values / length;
-                //console.log(average);
+
                 debounceRings(average, callback);
             }
         })
         .catch(function (err) {
             console.log("Microphone read error");
+            alert("Microphone read error");
         });
     }
 
@@ -170,24 +186,11 @@
         console.log("running tests");
         var testFunctions = [
             function () {
-                receiveMessage("Hi...")
+                receiveMessage("Hey. Can you meet the buyer today?")
             },
             function () {
-                receiveMessage("I've just solved that problem you were having!")
-            },
-            clap,
-            function () {},
-            clap,
-            clap,
-            function () {},
-            clap,
-            clap,
-            clap,
-            function () {},
-            clap,
-            clap,
-            clap,
-            clap
+                receiveMessage("Meeting confirmed. He sounded super keen!")
+            }
         ];
 
         var idx = 0;
@@ -198,15 +201,48 @@
                 }
                 testFunctions[idx]();
                 idx++;
-            }, BREAK * 0.7);
+            }, 5E3);
 
     }
 
+    function flash(isOn) {
+        var className = "flash";
+        var chatClasses = document.body.classList;
+        if (isOn) {
+            chatClasses.add(className);
+            document.getElementById('vol').style.color = "red";
+        } else {
+            chatClasses.remove(className);
+            document.getElementById('vol').style.color = "black";
+        }
+    }
+
+    function devMode() {
+        if (/log/.test(location.hash)) {
+            document.getElementById("logging").style.display = "block";
+        }
+
+        var r = /\bHIGH=(\d+)/;
+        var matches = r.exec(location.hash);
+        if (matches) {
+            HIGH = parseInt(matches[1], 10);
+            log("Volume threshold is " + HIGH + "%");
+        }
+
+        var r = /\bBREAK=(\d+)/;
+        var matches = r.exec(location.hash);
+        if (matches) {
+            BREAK = parseInt(matches[1], 10);
+            log("Break threshold is " + BREAK + " ms");
+        }
+    }
+
     /* Start */
+    devMode();
     window.init = function (button) {
         button.style.display = 'none';
         getVolume(react);
-        if (location.hash === "#test") {
+        if (/\btest\b/.test(location.hash)) {
             test();
         } else {
             get_messages();
