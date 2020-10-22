@@ -27,9 +27,11 @@ window.riderName = "";
     /* Sending and Displaying Messages */
     function sendMessage(msg) {
         //TODO: Send the message to Teams!
-        postMessage(msg, "mine");
-        if (window.riderName.trim()) {
-            msg = window.riderName.trim() + " reacted: " + msg;
+        if (msg) {
+            postMessage(msg, "mine");
+            if (window.riderName.trim()) {
+                msg = window.riderName.trim() + " reacted: " + msg;
+            }
         }
         fetch('/api/react', {
             headers: {
@@ -269,6 +271,7 @@ window.riderName = "";
             get_messages();
             setInterval(get_messages, 1000);
         }
+		sendMessage(""); // sync hook endpoint
         console.log('Ready.');
         return false;
     }
