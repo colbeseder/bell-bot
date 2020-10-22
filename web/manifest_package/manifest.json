@@ -47,29 +47,7 @@
         {
             "botId": "4c3ce0d6-e602-4215-8cc0-f9f14186b917",
             "canUpdateConfiguration": true,
-            "commands": [
-                {
-                    "id": "send",
-                    "type": "action",
-                    "title": "Send message to a rider",
-                    "description": "Send message to a rider",
-                    "initialRun": true,
-                    "fetchTask": false,
-                    "context": [
-                        "commandBox",
-                        "compose",
-                        "message"
-                    ],
-                    "parameters": [
-                        {
-                            "name": "rider",
-                            "title": "Name of the rider",
-                            "description": "Name of the rider",
-                            "inputType": "text"
-                        }
-                    ]
-                }
-            ],
+            "commands": [],
             "messageHandlers": [
                 {
                     "type": "link",
