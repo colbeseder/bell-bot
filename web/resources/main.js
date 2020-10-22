@@ -17,7 +17,7 @@ document.getElementById("riderNameInput").value = window.riderName || window.loc
 (function () {
     var HIGH = 40; // %
     var LOW = Math.floor(HIGH * 0.5);
-    var BREAK = 750; // ms
+    var BREAK = 850; // ms
     var reactions = ["👍", "❤️", "👏"];
     var user = 1; //TODO!
 
