@@ -1,37 +1,47 @@
 <!DOCTYPE>
 <html>
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap" rel="stylesheet">
-	<link rel="stylesheet" href="resources/main.css">
-</head>
-<body>
-	<div id="topbar" onclick="location='/'">
-		<img src="resources/logo.png" id="logo">
-		<span>Chime In!</span>
-	</div>
-	<div id="startPane">
-		<form onsubmit="return init()">
-			<table>
-			<tr><td>Your Name</td>  <td><input id="riderNameInput" oninput="window.riderName=this.value;window.localStorage.riderName=this.value"></td></tr>
-			<tr><td>Incoming Webhook endpoint</td>  <td><input id="hookInput" oninput="window.hook=this.value;window.localStorage.hook=this.value"></td></tr>
-			<tr><td></td><td>
-		<!-- Get use interaction to activate Speech & Mic APIs -->
-			<button id="bye" onclick="init(this)">Start</button>
-			</td></tr>
-			</table><br>
-			<span class="tip">First time here? Check out the <a href="/help">Getting Started Guide</a></span><br><br>
-			<span class="calm">Or check out <a href="https://github.com/colbeseder/bell-bot" target=”_blank”><i>Chime In</i> on Github</a></span>
-		</form>
-	</div>
-
-	<div id="chat">
-	</div>
-	<div id="logging">
-		<span>Volume: <span id="vol" ></span></span><br>
-		<div id="debug"></div>
-	</div>
-	<script src="resources/main.js"></script>
-</body>
+    <head>
+        <title>Chime In!</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="resources/main.css">
+    </head>
+    <body>
+        <div id="topbar" onclick="location='/'">
+            <img src="resources/logo.png" id="logo">
+            <span>Chime In!</span>
+        </div>
+        <div id="startPane">
+            <form onsubmit="return init()">
+                <table>
+                    <tr>
+                        <td>Your Name</td>
+                        <td><input id="riderNameInput" oninput="window.riderName=this.value;window.localStorage.riderName=this.value"></td>
+                    </tr>
+                    <tr>
+                        <td>Incoming Webhook endpoint</td>
+                        <td><input id="hookInput" oninput="window.hook=this.value;window.localStorage.hook=this.value"></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <!-- Get use interaction to activate Speech & Mic APIs -->
+                            <button id="bye" onclick="init(this)">Start</button>
+                        </td>
+                    </tr>
+                </table>
+                <br>
+                <span class="tip">First time here? Check out the <a href="/help">Getting Started Guide</a></span><br><br>
+                <span class="calm">Or check out <a href="https://github.com/colbeseder/bell-bot" target=”_blank”><i>Chime In</i> on Github</a></span>
+            </form>
+        </div>
+        <div id="chat">
+        </div>
+        <div id="logging">
+            <span>Volume: <span id="vol" ></span></span><br>
+            <div id="debug"></div>
+        </div>
+        <script src="resources/main.js"></script>
+    </body>
 </html>
