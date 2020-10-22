@@ -11,5 +11,4 @@ This is a just-for-fun project for the _hybrid productivity platform_ hackathon.
 
 [https://youtu.be/d0vH8_5Cnzc](https://youtu.be/d0vH8_5Cnzc)
 
-You can check it out here: https://hybridproductivity-platform.bemyapp.com/#/projects/5f79dc52c2c53c001b779abe
-
+You can check it out here: https://bell.francecentral.cloudapp.azure.com:5000/
