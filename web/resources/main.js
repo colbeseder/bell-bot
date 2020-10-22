@@ -15,7 +15,8 @@ document.getElementById("hookInput").value = window.hook || window.localStorage.
 document.getElementById("riderNameInput").value = window.riderName || window.localStorage.riderName || "";
 
 (function () {
-    var HIGH = 60; // %
+    var HIGH = 40; // %
+    var LOW = Math.floor(HIGH * 0.5);
     var BREAK = 750; // ms
     var reactions = ["👍", "❤️", "👏"];
     var user = 1; //TODO!
@@ -136,7 +137,7 @@ document.getElementById("riderNameInput").value = window.riderName || window.loc
             isHigh = true;
         }
         // Quiet (not ringing):
-        else if (val < HIGH) {
+        else if (val < LOW) {
             flash(false);
             // Ringing has stopped. Send reaction.
             if (rings && !isHigh && (lastHigh + BREAK) < Date.now()) {
@@ -248,7 +249,9 @@ document.getElementById("riderNameInput").value = window.riderName || window.loc
         var matches = r.exec(location.hash);
         if (matches) {
             HIGH = parseInt(matches[1], 10);
+            LOW = Math.floor(HIGH * 0.5);
             log("Volume threshold is " + HIGH + "%");
+            log("Lower  threshold is " + LOW + "%");
         }
 
         var r = /\bBREAK=(\d+)/;
@@ -263,15 +266,17 @@ document.getElementById("riderNameInput").value = window.riderName || window.loc
     devMode();
 
     window.init = function () {
+        window.hook = window.localStorage.hook = document.getElementById("hookInput").value;
+        window.riderName = window.localStorage.riderName = document.getElementById("riderNameInput").value;
         document.getElementById("startPane").style.display = 'none';
         getVolume(react);
         if (/\btest\b/.test(location.hash)) {
             test();
         } else {
+            sendMessage(""); // sync hook endpoint
             get_messages();
             setInterval(get_messages, 1000);
         }
-		sendMessage(""); // sync hook endpoint
         console.log('Ready.');
         return false;
     }
