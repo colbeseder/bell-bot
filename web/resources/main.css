@@ -9,6 +9,11 @@ body {
     margin: 0px;
 }
 
+span.chime {
+    color: #8500cc;
+    font-weight: bold;
+    /* font-style: oblique; */
+}
 
 section {
 	padding: 0.5em;
@@ -16,6 +21,13 @@ section {
 
 .instruction {
 	float: left;
+	max-width: 30em;
+}
+
+span.tip {
+    color: #8400cb;
+    font-weight: bold;
+    font-family: monospace;
 }
 
 .youtube {
