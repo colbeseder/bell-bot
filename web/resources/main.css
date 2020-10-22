@@ -11,8 +11,8 @@ body {
 
 span.chime {
     color: #8500cc;
+    font-family: 'Lato', sans-serif;
     font-weight: bold;
-    /* font-style: oblique; */
 }
 
 section {
