@@ -9,9 +9,6 @@ body {
     margin: 0px;
 }
 
-#bye {
-    margin: 3em;
-}
 
 section {
 	padding: 0.5em;
@@ -64,7 +61,7 @@ section {
     float: left;
 }
 
-div#main {
+div#main, .calm {
     padding-left: 1em;
     font-size: medium;
 }
