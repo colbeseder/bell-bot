@@ -26,6 +26,10 @@ section {
     max-width: 93%;
 }
 
+button#bye {
+    margin: 2em;
+}
+
 .flash {
     background-color: #f1edd1;
 }
