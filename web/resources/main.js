@@ -11,8 +11,11 @@
 window.hook = "";
 window.riderName = "";
 
+document.getElementById("hookInput").value = window.hook || window.localStorage.hook || "";
+document.getElementById("riderNameInput").value = window.riderName || window.localStorage.riderName || "";
+
 (function () {
-    var HIGH = 40; // %
+    var HIGH = 60; // %
     var BREAK = 750; // ms
     var reactions = ["👍", "❤️", "👏"];
     var user = 1; //TODO!
@@ -256,9 +259,6 @@ window.riderName = "";
 
     /* Start */
     devMode();
-
-    document.getElementById("riderNameInput").value = window.localStorage.riderName || "";
-    document.getElementById("hookInput").value = window.localStorage.hook || "";
 
     window.init = function () {
         document.getElementById("startPane").style.display = 'none';

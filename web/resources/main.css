@@ -25,6 +25,10 @@ section {
 	margin: 1em;
 }
 
+#startPane {
+    max-width: 93%;
+}
+
 .flash {
     background-color: #f1edd1;
 }
