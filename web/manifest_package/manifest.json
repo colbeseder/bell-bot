@@ -1,0 +1,92 @@
+{
+    "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.7/MicrosoftTeams.schema.json",
+    "manifestVersion": "1.7",
+    "version": "1.0.0",
+    "id": "24483b53-4b0d-441f-9832-583548aa3c76",
+    "packageName": "com.azure.cloudapp.francecentral.bell",
+    "developer": {
+        "name": "Bryan",
+        "websiteUrl": "https://bell.francecentral.cloudapp.azure.com:5000/",
+        "privacyUrl": "https://bell.francecentral.cloudapp.azure.com:5000/",
+        "termsOfUseUrl": "https://bell.francecentral.cloudapp.azure.com:5000/"
+    },
+    "icons": {
+        "color": "color.png",
+        "outline": "outline.png"
+    },
+    "name": {
+        "short": "Chime In",
+        "full": ""
+    },
+    "description": {
+        "short": "A safe and fun way to communicate on Microsoft Teams while riding a bike.",
+        "full": "Message your contacts safely while they're cycling. And they can respond by ringing their bell!"
+    },
+    "accentColor": "#8500CC",
+    "bots": [
+        {
+            "botId": "4c3ce0d6-e602-4215-8cc0-f9f14186b917",
+            "scopes": [
+                "personal",
+                "team",
+                "groupchat"
+            ],
+            "supportsFiles": false,
+            "isNotificationOnly": false
+        }
+    ],
+    "connectors": [
+        {
+            "connectorId": "0058c72e-b3e3-4d8b-86f9-7cfeb11a27da",
+            "scopes": [
+                "team"
+            ]
+        }
+    ],
+    "composeExtensions": [
+        {
+            "botId": "4c3ce0d6-e602-4215-8cc0-f9f14186b917",
+            "canUpdateConfiguration": true,
+            "commands": [
+                {
+                    "id": "send",
+                    "type": "action",
+                    "title": "Send message to a rider",
+                    "description": "Send message to a rider",
+                    "initialRun": true,
+                    "fetchTask": false,
+                    "context": [
+                        "commandBox",
+                        "compose",
+                        "message"
+                    ],
+                    "parameters": [
+                        {
+                            "name": "rider",
+                            "title": "Name of the rider",
+                            "description": "Name of the rider",
+                            "inputType": "text"
+                        }
+                    ]
+                }
+            ],
+            "messageHandlers": [
+                {
+                    "type": "link",
+                    "value": {
+                        "domains": [
+                            "bell.francecentral.cloudapp.azure.com"
+                        ]
+                    }
+                }
+            ]
+        }
+    ],
+    "permissions": [
+        "identity",
+        "messageTeamMembers"
+    ],
+    "validDomains": [
+        "bell.francecentral.cloudapp.azure.com"
+    ]
+}
