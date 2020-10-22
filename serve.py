@@ -7,7 +7,8 @@ last_msg = None
 
 def send_msg(url, text):
     global dmp
-
+    if url == "" or text = "":
+        return
     myobj = {
         "text": text
     }
