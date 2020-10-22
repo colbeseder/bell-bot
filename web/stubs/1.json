@@ -1,8 +1,0 @@
-{
-	"messages": [
-		{"id": 1, "from": "me",    "body": "Talk later."},
-		{"id": 2, "from": "me",    "body": "I'm going for a ride"},
-		{"id": 3, "from": "Naomi", "body": "How's the ride?!"},
-		{"id": 4, "from": "Naomi", "body": "I sent a cake to your house."}
-	]
-}
