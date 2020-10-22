@@ -28,6 +28,7 @@ span.tip {
     color: #8400cb;
     font-weight: bold;
     font-family: monospace;
+    padding-left: 1em;
 }
 
 .youtube {
@@ -36,10 +37,6 @@ span.tip {
 
 #startPane {
     max-width: 93%;
-}
-
-button#bye {
-    margin: 2em;
 }
 
 .flash {

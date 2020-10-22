@@ -16,11 +16,13 @@
 			<table>
 			<tr><td>Your Name</td>  <td><input id="riderNameInput" oninput="window.riderName=this.value;window.localStorage.riderName=this.value"></td></tr>
 			<tr><td>Incoming Webhook endpoint</td>  <td><input id="hookInput" oninput="window.hook=this.value;window.localStorage.hook=this.value"></td></tr>
-			<tr><td><a href="/help">Setup Instructions & Demo video</a></td></tr>
-			</table>
+			<tr><td></td><td>
 		<!-- Get use interaction to activate Speech & Mic APIs -->
-			<button id="bye" onclick="init(this)">Start</button><br>
-			<span class="calm">Check out <a href="https://github.com/colbeseder/bell-bot" target=”_blank”><i>Chime In</i> on Github</a></span>
+			<button id="bye" onclick="init(this)">Start</button>
+			</td></tr>
+			</table><br>
+			<span class="tip">First time here? Check out the <a href="/help">Getting Started Guide</a></span><br><br>
+			<span class="calm">Or check out <a href="https://github.com/colbeseder/bell-bot" target=”_blank”><i>Chime In</i> on Github</a></span>
 		</form>
 	</div>
 
