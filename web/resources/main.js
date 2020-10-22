@@ -8,6 +8,9 @@
  *
  */
 
+window.hook = "";
+window.riderName = "";
+
 (function () {
     var HIGH = 40; // %
     var BREAK = 750; // ms
@@ -25,6 +28,20 @@
     function sendMessage(msg) {
         //TODO: Send the message to Teams!
         postMessage(msg, "mine");
+        if (window.riderName.trim()) {
+            msg = window.riderName.trim() + " reacted: " + msg;
+        }
+        fetch('/api/react', {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            method: 'post',
+            body: JSON.stringify({
+                "text": msg,
+                "hook": window.hook.trim()
+            })
+        })
     }
 
     function receiveMessage(msg) {
@@ -239,8 +256,12 @@
 
     /* Start */
     devMode();
-    window.init = function (button) {
-        button.style.display = 'none';
+
+    document.getElementById("riderNameInput").value = window.localStorage.riderName || "";
+    document.getElementById("hookInput").value = window.localStorage.hook || "";
+
+    window.init = function () {
+        document.getElementById("startPane").style.display = 'none';
         getVolume(react);
         if (/\btest\b/.test(location.hash)) {
             test();
@@ -249,5 +270,6 @@
             setInterval(get_messages, 1000);
         }
         console.log('Ready.');
+        return false;
     }
 })();

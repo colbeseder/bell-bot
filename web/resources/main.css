@@ -13,6 +13,18 @@ body {
     margin: 3em;
 }
 
+section {
+	padding: 0.5em;
+}
+
+.instruction {
+	float: left;
+}
+
+.youtube {
+	margin: 1em;
+}
+
 .flash {
     background-color: #f1edd1;
 }
@@ -48,6 +60,11 @@ body {
     float: left;
 }
 
+div#main {
+    padding-left: 1em;
+    font-size: medium;
+}
+
 .namebox {
     float: left;
     padding-right: 1em;
@@ -62,7 +79,7 @@ body {
     margin-bottom: 6px;
     width: max-content;
     max-width: 85%;
-    min-width: 7em;
+    min-width: 10em;
 
     position: relative;
     border-radius: .3em;
