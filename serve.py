@@ -2,7 +2,14 @@ from flask import *
 import json, requests, re
 
 dmp = ""
-ips = set()
+ips = {
+    "home":      set(),
+    "help":      set(),
+    "manifest" : set(),
+    "ips" :      set(),
+    "react" :    set(),
+    "messages" : set()
+}
 
 def send_msg(url, text):
     global dmp
@@ -29,13 +36,13 @@ app = Flask(__name__)
 @app.route('/', methods=['GET'])
 def index():
     global ips
-    ips.add(request.remote_addr)
+    ips["home"].add(request.remote_addr)
     return send_file('web/index.html')
 
 @app.route('/help', methods=['GET'])
 def help():
     global ips
-    ips.add(request.remote_addr)
+    ips["help"].add(request.remote_addr)
     return send_file('web/help.html')
 
 @app.route('/favicon.ico', methods=['GET'])
@@ -46,11 +53,13 @@ def favicon():
 def teams_in():
     global dmp
     #dmp = json.dumps(request.json)
+    ips["messages"].add(request.remote_addr)
     got_message(request.json)
     return send_from_directory('web/resources', 'ok.txt')
 
 @app.route('/api/react', methods=['POST'])
 def teams_out():
+    ips["react"].add(request.remote_addr)
     send_msg(request.json['hook'], request.json['text'])
     return send_from_directory('web/resources', 'ok.txt')
 
@@ -62,6 +71,7 @@ def m():
 @app.route('/api/ips', methods=['GET'])
 def get_ips():
     global ips
+    ips["ips"].add(request.remote_addr)
     return str(ips)
 
 @app.route('/resources/<path:path>')
@@ -74,6 +84,7 @@ def send_images(path):
 
 @app.route('/ChimeInManifest')
 def get_manifest():
+    ips["manifest"].add(request.remote_addr)
     return send_from_directory('web/manifest_package', 'ChimeIn.zip')
 
 @app.route('/messages/<path:path>')
