@@ -113,6 +113,7 @@ document.getElementById("riderNameInput").value = window.riderName || window.loc
             speech.text = msg;
             window.speechSynthesis.speak(speech);
         } catch (er) {
+            alert("Warning: Could not activate text-to-speech");
             log(er);
         }
     }
@@ -182,7 +183,7 @@ document.getElementById("riderNameInput").value = window.riderName || window.loc
         })
         .catch(function (err) {
             console.log("Microphone read error");
-            alert("Microphone read error");
+            alert("Warning: Could not activate microphone");
         });
     }
 
