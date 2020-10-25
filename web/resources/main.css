@@ -9,6 +9,13 @@ body {
     margin: 0px;
 }
 
+#menu>ul {
+    font-size: 110%;
+    width: max-content;
+    padding-left: 12px;
+    list-style-type: none;
+}
+
 span.chime {
     color: #8500cc;
     font-family: 'Lato', sans-serif;
